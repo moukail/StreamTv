@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+xmlns:beans="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:util="http://www.springframework.org/schema/util"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.1.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<http pattern="/resources/" security="none" />
+  
+	<http auto-config="true" use-expressions="true">
+	    <intercept-url pattern="/" access="permitAll"/>
+	    <intercept-url pattern="/user" access="hasRole('user', 'admin')"/>
+		<intercept-url pattern="/user/login" access="permitAll"/>
+		<intercept-url pattern="/user/logout" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/user/denied" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/user/signup" access="permitAll"/>
+		<intercept-url pattern="/category/index" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/country/index" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/language/index" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/tv/index" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/radio/index" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/stream/index" access="hasRole('admin')"/>
+		<intercept-url pattern="/stream/index/*" access="hasAnyRole('user', 'admin')"/>
+		<intercept-url pattern="/admin" access="hasRole('admin')"/>
+
+		<form-login login-page="/user/login" authentication-failure-url="/user/loginfailed" default-target-url="/"/>
+
+		<access-denied-handler error-page="/user/denied"/>
+
+		<logout logout-success-url="/user/logout"/>
+	</http>
+	
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder ref="passwordEncoder"/>
+			<jdbc-user-service data-source-ref="dataSource" 
+			    users-by-username-query="select username, password, enabled from user where username=?" 
+			    authorities-by-username-query="select username, role from user where username =?  "/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<beans:bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:location="/WEB-INF/jdbc.properties" />
+        
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+		p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+		p:password="${jdbc.password}" />
+</beans:beans>

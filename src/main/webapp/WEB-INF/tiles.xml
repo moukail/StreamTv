@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition"
+        template="/WEB-INF/layouts/layout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/layouts/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/layouts/menu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+    </definition>
+ 
+    <definition name="mobile.definition"
+        template="/WEB-INF/layouts/mobile_layout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/layouts/mobile_header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/layouts/mobile_menu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/layouts/mobile_footer.jsp" />
+    </definition>
+    
+    <definition name="home" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+    </definition>
+    <definition name="home-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/home-mobile.jsp" />
+    </definition>
+    <definition name="signup" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/signup.jsp" />
+    </definition>
+    <definition name="signup-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/signup.jsp" />
+    </definition>
+    <definition name="profile" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
+    </definition>
+    <definition name="profile-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
+    </definition>
+    <definition name="login" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+    </definition>
+    <definition name="login-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+    </definition>
+    <definition name="forgotpassword" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/forgotpassword.jsp" />
+    </definition>
+    <definition name="forgotpassword-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/forgotpassword.jsp" />
+    </definition>
+    <definition name="thanks" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/thanks.jsp" />
+    </definition>
+    <definition name="thanks-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/thanks.jsp" />
+    </definition>
+	<definition name="country" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/country.jsp" />
+    </definition>
+    <definition name="country-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/country.jsp" />
+    </definition>
+	<definition name="category" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/category.jsp" />
+    </definition>
+    <definition name="category-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/category.jsp" />
+    </definition>
+    <definition name="language" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/language.jsp" />
+    </definition>
+    <definition name="language-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/language.jsp" />
+    </definition>
+    <definition name="channel" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/channel.jsp" />
+    </definition>
+    <definition name="channel-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/channel.jsp" />
+    </definition>
+    <definition name="schedule" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/schedule.jsp" />
+    </definition>
+    <definition name="schedule-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/schedule.jsp" />
+    </definition>
+    <definition name="channels" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/channels.jsp" />
+    </definition>
+    <definition name="channels-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/channels.jsp" />
+    </definition>
+    <definition name="stream" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/stream.jsp" />
+    </definition>
+    <definition name="stream-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/stream.jsp" />
+    </definition>
+ 	<definition name="play" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/play.jsp" />
+    </definition>
+    <definition name="play-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/play.jsp" />
+    </definition>
+    <definition name="vod" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/vod.jsp" />
+    </definition>
+    <definition name="vod-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/vod.jsp" />
+    </definition>
+    <definition name="episode" extends="base.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/episode.jsp" />
+    </definition>
+    <definition name="episode-mobile" extends="mobile.definition">
+        <put-attribute name="title" value="StreamTv" />
+        <put-attribute name="body" value="/WEB-INF/views/episode.jsp" />
+    </definition>
+</tiles-definitions>

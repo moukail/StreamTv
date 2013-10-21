@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<h3>Hi,</h3>
+		<p>There is new channels to watch</p>
+		<table>
+			#foreach ($channel in $channels)
+				<tr>
+					<td>$channel.getChannelName()</td>
+					<td>$channel.getCountry().getCountryName()</td>
+					<td>$channel.getCategory().getCategoryName()</td>
+					<td><a href='http://streamtv.cloudfoundry.com/stream/index/$channel.getId()'>click to watch</a></td>
+				</tr>
+			#end
+		</table>
+	</body>
+</html>

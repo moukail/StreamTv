@@ -1,0 +1,11 @@
+<html>
+<body>
+<h3>Hi ${user.firstname}, welcome!</h3>
+ 
+<div>
+   Your email address is <a href="mailto:${user.email}">${user.email}</a>.
+   <p>You had registered with us. Please click on this link to activate your account - <a href="http://streamtv.cloudfoundry.com/user/activation?email=${user.email}&activate=${user.activationKey}">Activate Link</a>.</p>
+   <p>Thanks Tyical Security Admin</p>
+</div>
+</body>
+</html>

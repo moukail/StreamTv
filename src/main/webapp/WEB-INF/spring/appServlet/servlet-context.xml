@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:component-scan base-package="nl.moukail.streamtv" />
+	<mvc:annotation-driven>
+    	<mvc:argument-resolvers>
+        	<bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+        	<bean class="org.springframework.mobile.device.site.SitePreferenceWebArgumentResolver" />        
+    	</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	<mvc:interceptors>
+        <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang"/>
+        <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
+    	<bean class="org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor" />
+    </mvc:interceptors>
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    	<property name="viewClass">
+        	<value>org.springframework.web.servlet.view.tiles2.TilesView</value>
+    	</property>
+	</bean>
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+    	<property name="definitions">
+        	<list>
+            	<value>/WEB-INF/tiles.xml</value>
+        	</list>
+    	</property>
+	</bean>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" p:basename="classpath:messages" p:defaultEncoding="UTF-8" p:fallbackToSystemLocale="false"/>
+    
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" p:cookieName="locale" p:defaultLocale="nl"/>
+	
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource" p:basenamePrefix="theme-" />
+
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>
+    
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:location="/WEB-INF/jdbc.properties" />
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+		p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+		p:password="${jdbc.password}" />
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="nl.moukail.streamtv.entity" />
+		<property name="hibernateProperties">
+			<props>
+	            <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+	            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+	         </props>
+		</property>
+	</bean>
+ 
+   <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <property name="velocityProperties">
+         <value>
+            resource.loader=class
+            class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+         </value>
+      </property>
+   </bean>
+	<tx:annotation-driven />
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${email.host}" />
+		<property name="port" value="${email.port}" />
+		<property name="username" value="${email.username}" />
+		<property name="password" value="${email.password}" />
+
+		<property name="javaMailProperties">
+   			<props>
+				<prop key="mail.smtp.auth">true</prop>
+      	      		<prop key="mail.smtp.starttls.enable">true</prop>
+      	   		</props>
+		</property>
+	</bean>
+      
+	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+
+	<task:executor id="myExecutor" pool-size="5"/>
+
+	<task:scheduler id="myScheduler" pool-size="10"/>
+</beans>
