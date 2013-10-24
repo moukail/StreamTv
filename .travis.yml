@@ -1,4 +1,4 @@
-language: java
+language: java 1.7
 jdk:
   - oraclejdk7
   - openjdk6
