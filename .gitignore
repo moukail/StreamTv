@@ -5,4 +5,3 @@
 /tomcat.*
 /.idea
 /*.iml
-jdbc.properties
