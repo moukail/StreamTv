@@ -5,9 +5,9 @@ import java.util.List;
 import nl.moukail.streamtv.entity.Episode;
 
 public interface EpisodeDAO {
-	public Episode get(Integer id);
-	public List<Episode> listEpisode(int vodId);
-	public void addEpisode(Episode episode);
-	public void updateEpisode(Episode episode);
-	public void removeEpisode(Integer id);
+	Episode get(Integer id);
+	List<Episode> listEpisode(int vodId);
+	void addEpisode(Episode episode);
+	void updateEpisode(Episode episode);
+	void removeEpisode(Integer id);
 }

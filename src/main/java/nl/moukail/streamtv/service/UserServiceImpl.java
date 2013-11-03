@@ -1,8 +1,6 @@
 package nl.moukail.streamtv.service;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -98,7 +96,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Weekly
 	public void sendChannels() {
-		java.util.Date date= new java.util.Date();
+		Date date= new Date();
 		logger.info("test mail:" + new Timestamp(date.getTime()));
 		if(!getChannels().isEmpty()){
 			

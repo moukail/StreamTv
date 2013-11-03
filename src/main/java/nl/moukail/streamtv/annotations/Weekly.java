@@ -7,7 +7,11 @@ import java.lang.annotation.Target;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
-@Scheduled(cron = "0 0 * * * 0")//Run once a week, midnight on Sunday
-@Target(value=ElementType.METHOD)
+/**
+ * @author Ismail
+ *Run once a week, midnight on Sunday
+ */
+@Scheduled(cron = "0 0 * * * 0")
+@Target(value = ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Weekly {}
+public @interface Weekly { }

@@ -6,9 +6,9 @@ import nl.moukail.streamtv.entity.Country;
 
 public interface CountryDAO {
 	
-	public void addCountry(Country country);
-	public List<Country> listCountry();
-	public void removeCountry(Integer id);
-	public Country get(int id);
+	void addCountry(Country country);
+	List<Country> listCountry();
+	void removeCountry(Integer id);
+	Country get(int id);
 	
 }

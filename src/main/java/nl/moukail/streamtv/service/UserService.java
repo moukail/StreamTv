@@ -7,15 +7,15 @@ import nl.moukail.streamtv.entity.Channel;
 import nl.moukail.streamtv.entity.User;
 
 public interface UserService {
-	public void addUser(User user);
-	public List<User> listUser();
-	public void removeUser(Integer id);
-	public User findUserByEmailAndActivationKey(String email, String activationKey);
-	public boolean usernameExist(User user);
-	public boolean emailExist(User user);
-	public void activate(User user);
-	public User get(int id);
-	public ArrayList<Channel> getChannels();
-	public void sendChannels();
-	public User sendPassword(String string);
+	void addUser(User user);
+	List<User> listUser();
+	void removeUser(Integer id);
+	User findUserByEmailAndActivationKey(String email, String activationKey);
+	boolean usernameExist(User user);
+	boolean emailExist(User user);
+	void activate(User user);
+	User get(int id);
+	ArrayList<Channel> getChannels();
+	void sendChannels();
+	User sendPassword(String string);
 }

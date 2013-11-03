@@ -5,8 +5,8 @@ import java.util.List;
 import nl.moukail.streamtv.entity.Country;
 
 public interface CountryService {
-	public void addCountry(Country country);
-	public List<Country> listCountry();
-	public void removeCountry(Integer id);
-	public Country get(Integer id);
+	void addCountry(Country country);
+	List<Country> listCountry();
+	void removeCountry(Integer id);
+	Country get(Integer id);
 }

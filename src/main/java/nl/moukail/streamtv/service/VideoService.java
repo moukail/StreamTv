@@ -5,10 +5,10 @@ import java.util.List;
 import nl.moukail.streamtv.entity.Video;
 
 public interface VideoService {
-	public void addVideo(Video video);
-	public void updateVideo(Video video);
-	public List<Video> listVideo();
-	public void removeVideo(Integer id);
-	public void fetchYoutubeVideos();
-	public Video get(Integer id);
+	void addVideo(Video video);
+	void updateVideo(Video video);
+	List<Video> listVideo();
+	void removeVideo(Integer id);
+	void fetchYoutubeVideos();
+	Video get(Integer id);
 }

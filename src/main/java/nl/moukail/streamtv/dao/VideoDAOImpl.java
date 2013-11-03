@@ -2,9 +2,6 @@ package nl.moukail.streamtv.dao;
 
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,12 +13,6 @@ public class VideoDAOImpl implements VideoDAO{
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	private static Logger log = LogManager.getRootLogger();
-	
-	private Session getSession(){
-        return sessionFactory.getCurrentSession();
-    }
 	
 	public void addVideo(Video video) {
 		sessionFactory.getCurrentSession().save(video);

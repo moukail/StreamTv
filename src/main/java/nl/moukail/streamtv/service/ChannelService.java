@@ -5,8 +5,8 @@ import java.util.List;
 import nl.moukail.streamtv.entity.Channel;
 
 public interface ChannelService {
-	public void addChannel(Channel channel);
-	public List<Channel> listChannel();
-	public void removeChannel(Integer id);
-	public Channel get(Integer id);
+	void addChannel(Channel channel);
+	List<Channel> listChannel();
+	void removeChannel(Integer id);
+	Channel get(Integer id);
 }

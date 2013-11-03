@@ -37,6 +37,11 @@
     	</developer>
 	</developers>
 	
+	<issueManagement>
+    	<system>Mantis</system>
+    	<url>http://mantis.moukail.nl</url>
+  	</issueManagement>
+  	
 	<scm>
 		<connection>scm:git:https://github.com/moukail/StreamTv.git</connection>
 		<developerConnection>scm:git:https://github.com/moukail/StreamTv.git</developerConnection>
@@ -60,6 +65,13 @@
       		</notifier>
 		</notifiers>
 	</ciManagement>
+	
+	<distributionManagement>
+    	<site>
+      		<id>my.server</id>
+      		<url>scp://192.168.1.1/mnt/raid1/project/</url>
+    	</site>
+	</distributionManagement>
 	
 	<properties>
 		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
@@ -268,6 +280,13 @@
 			<version>${org.slf4j.version}</version>
 		</dependency>
 		
+		<!-- Logentries -->
+		<dependency>
+			<groupId>com.logentries</groupId>
+			<artifactId>logentries-appender</artifactId>
+			<version>1.1.20</version>
+		</dependency>
+            
 	</dependencies>
 	
 	<build>
@@ -279,15 +298,25 @@
     		<filter>${basedir}/src/main/filters/filter1.properties</filter>
   		</filters>
   		 -->
+		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    	<scriptSourceDirectory>${basedir}/src/main/scripts</scriptSourceDirectory>
+		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+    	<outputDirectory>${basedir}/target/classes</outputDirectory>
+    	<testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
  		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
 				</configuration>
+			</plugin>
+			<plugin>
+  				<groupId>org.eclipse.jetty</groupId>
+  				<artifactId>jetty-maven-plugin</artifactId>
+  				<version>9.0.6.v20130930</version>
 			</plugin>
 			<plugin>
  				<groupId>org.apache.tomcat.maven</groupId>
@@ -311,6 +340,147 @@
 					</classpathContainers>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                	<port>8000</port>
+                    <locales>nl,en,fr</locales>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+                <dependencies>
+            		<dependency><!-- add support for ssh/scp -->
+              			<groupId>org.apache.maven.wagon</groupId>
+              			<artifactId>wagon-ssh</artifactId>
+              			<version>1.0</version>
+            		</dependency>
+          		</dependencies>
+            </plugin>
+			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-pdf-plugin</artifactId>
+  				<version>1.2</version>
+  				<configuration>
+          			<locales>en,fr,nl</locales>
+        		</configuration>
+  				<executions>
+    				<execution>
+      					<id>pdf</id>
+      					<phase>site</phase>
+      					<goals>
+        					<goal>pdf</goal>
+      					</goals>
+      					<configuration>
+        					<outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+      					</configuration>
+    				</execution>
+  				</executions>
+			</plugin>
 		</plugins>
 	</build>
+	
+	<reporting>
+		<outputDirectory>${basedir}/target/site</outputDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-project-info-reports-plugin</artifactId>
+        		<version>2.7</version>
+        		<reportSets>
+					<reportSet>
+            			<reports>
+              				<report>scm</report>
+              				<report>cim</report>
+              				<report>dependencies</report>
+              				<report>dependency-info</report>
+            			</reports>
+          			</reportSet>
+        		</reportSets>
+      		</plugin>
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-javadoc-plugin</artifactId>
+        		<version>2.9.1</version>
+        		<reportSets>
+          			<reportSet>
+            			<id>html</id>
+            			<configuration>
+              				<doctitle>My API for ${project.name} ${project.version}</doctitle>
+              				<windowtitle>My API for ${project.name} ${project.version}</windowtitle>
+            			</configuration>
+            			<reports>
+              				<report>javadoc</report>
+            			</reports>
+          			</reportSet>
+          			<reportSet>
+            			<id>test-html</id>
+            			<configuration>
+              				<testDoctitle>My Test API for ${project.name} ${project.version}</testDoctitle>
+              				<testWindowtitle>My Test API for ${project.name} ${project.version}</testWindowtitle>
+            			</configuration>
+            			<reports>
+              				<report>test-javadoc</report>
+            			</reports>
+          			</reportSet>
+        		</reportSets>
+      		</plugin>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-surefire-report-plugin</artifactId>
+        		<version>2.16</version>
+        		<configuration>
+          			<showSuccess>false</showSuccess>
+        		</configuration>
+      		</plugin>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-jxr-plugin</artifactId>
+        		<version>2.3</version>
+        		<configuration>
+          			<linkJavadoc>true</linkJavadoc>
+        		</configuration>
+      		</plugin>
+      		 <plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-pmd-plugin</artifactId>
+        		<version>3.0.1</version>
+        		<configuration>
+          			<linkXref>true</linkXref>
+          			<sourceEncoding>utf-8</sourceEncoding>
+          			<minimumTokens>100</minimumTokens>
+          			<targetJdk>${maven.compiler.source}</targetJdk>
+          			<excludes>
+            			<exclude>**/*Bean.java</exclude>
+            			<exclude>**/generated/*.java</exclude>
+          			</excludes>
+          			<excludeRoots>
+            			<excludeRoot>target/generated-sources/stubs</excludeRoot>
+          			</excludeRoots>
+        		</configuration>
+      		</plugin>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-checkstyle-plugin</artifactId>
+        		<version>2.10</version>
+      		</plugin>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-changelog-plugin</artifactId>
+        		<version>2.2</version>
+      		</plugin>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-changes-plugin</artifactId>
+        		<version>2.9</version>
+        		<reportSets>
+          			<reportSet>
+            			<reports>
+              				<report>github-report</report>
+            			</reports>
+          			</reportSet>
+        		</reportSets>
+      		</plugin>
+    	</plugins>
+	</reporting>
 </project>

@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import nl.moukail.streamtv.editor.CategoryEditor;
 import nl.moukail.streamtv.editor.LanguageEditor;
 import nl.moukail.streamtv.entity.Category;
-import nl.moukail.streamtv.entity.Film;
 import nl.moukail.streamtv.entity.Language;
 import nl.moukail.streamtv.entity.Serie;
 import nl.moukail.streamtv.service.CategoryService;

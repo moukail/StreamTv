@@ -6,13 +6,13 @@ import nl.moukail.streamtv.entity.User;
 
 public interface UserDAO {
 
-	public void addUser(User user);
-	public List<User> listUser();
-	public void removeUser(Integer id);
-	public User get(int id);
-	public User findUserByEmailAndActivationKey(String email, String activationKey);
-	public void activate(User user);
-	public User sendPassword(String email, String newPassword);
-	public boolean usernameExist(User user);
-	public boolean emailExist(User user);
+	void addUser(User user);
+	List<User> listUser();
+	void removeUser(Integer id);
+	User get(int id);
+	User findUserByEmailAndActivationKey(String email, String activationKey);
+	void activate(User user);
+	User sendPassword(String email, String newPassword);
+	boolean usernameExist(User user);
+	boolean emailExist(User user);
 }

@@ -7,7 +7,11 @@ import java.lang.annotation.Target;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
-@Scheduled(cron = "0 0 * * * ?")//Run once an hour, beginning of hour
-@Target(value=ElementType.METHOD)
+/**
+ * @author Ismail
+ *Run once an hour, beginning of hour
+ */
+@Scheduled(cron = "0 0 * * * ?")
+@Target(value = ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Hourly {}
+public @interface Hourly { }

@@ -1,0 +1,30 @@
+<document xmlns="http://maven.apache.org/DOCUMENT/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DOCUMENT/1.0.1 http://maven.apache.org/xsd/document-1.0.1.xsd"
+  outputName="${project.name}-doc-${project.version}">
+
+  <meta>
+    <title>User guide of ${project.name} version ${project.version}</title>
+    <author>${project.developers[0].email}</author>
+  </meta>
+
+  <toc name="Table of Contents">
+    <item name="Introduction" ref="index.apt"/>
+    <item name="Usage" ref="usage.apt.vm"/>
+    <item name="Filtering Document Descriptor" ref="examples/filtering.apt"/>
+    <item name="Configuring Reports" ref="/examples/configuring-reports.xml.vm"/>
+    <item name="Limitations" ref="limitations.apt"/>
+    <item name="FAQ" ref="faq.fml"/>
+  </toc>
+
+  <cover>
+    <coverTitle>${project.name}</coverTitle>
+    <coverSubTitle>v. ${project.version}</coverSubTitle>
+    <coverType>User Guide</coverType>
+    <coverdate>${date}</coverdate> <!-- current date in ISO 8601 format -->
+    <projectName>${project.name}</projectName>
+    <projectLogo>http://maven.apache.org/images/maventxt_logo_200.gif</projectLogo>
+    <companyName>Moukail IT</companyName>
+    <companyLogo>http://www.apache.org/images/asf_logo_wide.png</companyLogo>
+  </cover>
+</document>

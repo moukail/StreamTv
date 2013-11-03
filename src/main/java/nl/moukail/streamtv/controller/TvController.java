@@ -7,15 +7,12 @@ import javax.validation.Valid;
 
 import nl.moukail.streamtv.editor.CategoryEditor;
 import nl.moukail.streamtv.editor.CountryEditor;
-import nl.moukail.streamtv.editor.LanguageEditor;
 import nl.moukail.streamtv.entity.Category;
 import nl.moukail.streamtv.entity.Country;
-import nl.moukail.streamtv.entity.Language;
 import nl.moukail.streamtv.entity.Tv;
 import nl.moukail.streamtv.service.CategoryService;
 import nl.moukail.streamtv.service.ChannelService;
 import nl.moukail.streamtv.service.CountryService;
-import nl.moukail.streamtv.service.LanguageService;
 import nl.moukail.streamtv.validator.ChannelValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;

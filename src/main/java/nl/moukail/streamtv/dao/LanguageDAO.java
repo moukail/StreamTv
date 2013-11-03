@@ -6,9 +6,9 @@ import nl.moukail.streamtv.entity.Language;
 
 public interface LanguageDAO {
 
-	public void addLanguage(Language language);
-	public List<Language> listLanguage();
-	public void removeLanguage(Integer id);
-	public Language get(int id);
+	void addLanguage(Language language);
+	List<Language> listLanguage();
+	void removeLanguage(Integer id);
+	Language get(int id);
 
 }

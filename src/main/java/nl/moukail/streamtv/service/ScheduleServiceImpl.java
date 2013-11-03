@@ -58,9 +58,6 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Qualifier("TvServiceImpl")
 	private ChannelService channelService;
 	
-	@Autowired
-	private CategoryService categoryService;
-	
 	public void addSchedule(Schedule schedule) {
 		scheduleDAO.addSchedule(schedule);
 	}
